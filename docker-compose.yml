@@ -1,0 +1,14 @@
+version: "2"
+services:
+  mpp-project-mysql:
+    container_name: mpp-project-mysql
+    image: cytopia/mysql-5.6
+    volumes:
+      - ./dev/data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_DATABASE: library
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123456789
+    ports:
+      - "3306:3306"

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AuthController">
+   <center>
+      <Pane prefHeight="588.0" prefWidth="1042.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+         <children>
+         	<ImageView fitHeight="140.0" fitWidth="522.0" layoutX="13.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/assets/images/uni-logo.png" />
+               </image>
+            </ImageView>
+            <Text fill="#8ba674" layoutX="111.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY">
+               <font>
+                  <Font name="System Bold" size="72.0" />
+               </font>
+            </Text>
+            <AnchorPane layoutX="521.0" layoutY="19.0" prefHeight="548.0" prefWidth="504.0" style="-fx-background-color: #e1e1e1;">
+               <children>
+                  <TextField layoutX="63.0" layoutY="145.0" prefHeight="47.0" prefWidth="378.0" promptText="user id/user name">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField layoutX="64.0" layoutY="214.0" prefHeight="49.0" prefWidth="377.0" promptText="Password">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </PasswordField>
+                  <Button fx:id="submitLogin" 
+                  onAction="#submitLogin" 
+                  layoutX="64.0" 
+                  layoutY="343.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="371.0" styleClass="login-button" text="LOGIN" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

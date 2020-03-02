@@ -1,0 +1,8 @@
+models/Role.class
+models/User.class
+models/Credential.class
+libs/HibernateUtils.class
+controllers/AuthController.class
+entities/User.class
+models/Librarian.class
+application/App.class
