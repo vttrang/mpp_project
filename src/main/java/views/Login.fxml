@@ -23,24 +23,22 @@
             </Text>
             <AnchorPane layoutX="521.0" layoutY="19.0" prefHeight="548.0" prefWidth="504.0" style="-fx-background-color: #e1e1e1;">
                <children>
-                  <TextField layoutX="63.0" layoutY="145.0" prefHeight="47.0" prefWidth="378.0" promptText="user id/user name">
+                  <TextField fx:id="userId" layoutX="63.0" layoutY="145.0" prefHeight="47.0" prefWidth="378.0" promptText="user id/user name">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </TextField>
-                  <PasswordField layoutX="64.0" layoutY="214.0" prefHeight="49.0" prefWidth="377.0" promptText="Password">
+                  <PasswordField fx:id="password" layoutX="64.0" layoutY="214.0" prefHeight="49.0" prefWidth="377.0" promptText="Password">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </PasswordField>
-                  <Button fx:id="submitLogin" 
-                  onAction="#submitLogin" 
-                  layoutX="64.0" 
-                  layoutY="343.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="371.0" styleClass="login-button" text="LOGIN" textFill="WHITE">
+                  <Button fx:id="submitLogin" layoutX="64.0" layoutY="343.0" mnemonicParsing="false" onAction="#submitLogin" prefHeight="51.0" prefWidth="371.0" styleClass="login-button" text="LOGIN" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
+                  <Text fx:id="errorMessage" fill="#d00909" layoutX="65.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="375.47802734375" />
                </children>
             </AnchorPane>
          </children>
