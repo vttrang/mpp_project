@@ -1,8 +1,11 @@
-models/Role.class
 models/User.class
-models/Credential.class
-libs/HibernateUtils.class
+entities/Credential.class
+entities/Role.class
 controllers/AuthController.class
-entities/User.class
 models/Librarian.class
 application/App.class
+models/Role.class
+entities/Address.class
+models/Credential.class
+libs/HibernateUtils.class
+entities/User.class
