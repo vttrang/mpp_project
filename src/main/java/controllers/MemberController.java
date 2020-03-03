@@ -5,9 +5,12 @@ import entities.Role;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import libs.HibernateUtils;
 import org.hibernate.Session;
@@ -38,12 +41,11 @@ public class MemberController implements Initializable {
     @FXML
     private Button save;
 
-    Session session;
+    private SessionFactory factory = HibernateUtils.getSessionFactory();
+    private Session session = factory.getCurrentSession();
 
     @FXML
     public void save(ActionEvent event) {
-        SessionFactory factory = HibernateUtils.getSessionFactory();
-        session = factory.getCurrentSession();
         try {
             session.getTransaction().begin();
 

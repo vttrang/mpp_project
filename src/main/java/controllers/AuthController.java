@@ -71,6 +71,7 @@ public class AuthController implements Initializable {
 				Scene scene = new Scene(root,1300,700);
 				scene.getStylesheets().add(getClass().getResource("/assets/css/application.css").toExternalForm());
 				primaryStage.setScene(scene);
+				session.close();
 			} else {
 				errorMessage.setText("Invalid User id and Password!");
 				session.close();
