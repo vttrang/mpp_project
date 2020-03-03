@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+   </center>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#8ca288" layoutX="101.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="| ADMIN">
+               <font>
+                  <Font size="72.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="94.0" fitWidth="71.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/images/uni-logo-short.png" />
+               </image>
+            </ImageView>
+            <Text fill="#8ba674" layoutX="12.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Line endX="1200.0" layoutX="100.0" layoutY="130.0" startX="-100.0" />
+            <Text layoutX="1052.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome: " />
+            <Text layoutX="1130.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Of Admin" />
+            <Button layoutX="912.0" layoutY="65.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" style="-fx-background-color: #8ba674;" text="Add New Book" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="737.0" layoutY="65.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" style="-fx-background-color: #8ba674;" text="Add New Member" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="1084.0" layoutY="65.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="160.0" style="-fx-background-color: #8ba674;" text="Add New Book Copy" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

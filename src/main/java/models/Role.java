@@ -3,8 +3,7 @@ package models;
 public enum Role {
 	LIBRARIAN("librarian", 1),
 	ADMIN("admin", 2),
-	MEMBER("library member", 3),
-	AUTHOR("author", 4);
+	MEMBER("library member", 3);
 	
 	private String name;
 	private int code;

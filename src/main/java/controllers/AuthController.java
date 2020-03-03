@@ -5,61 +5,79 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import libs.HibernateUtils;
 import entities.Address;
+import entities.Credential;
 import entities.Role;
 import entities.User;
+import libs.PasswordMD5;
+import libs.Utils;
 
 public class AuthController implements Initializable {
 	@FXML
-   private Button submitLogin;
+    private Button submitLogin;
+	
+	@FXML
+	private TextField userId;
+	
+	@FXML
+	private TextField password;
+	
+	@FXML
+	private Text errorMessage;
 	
 	@FXML
 	public void submitLogin(ActionEvent event) {
-		System.out.println("Button Clickgggged111111!");
-		System.out.println("asdasd");
+		
+		if(!Utils.isNumeric(userId.getText())) {
+			errorMessage.setText("User ID must be number!");
+			return;
+		}
+		
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
-		User user = null;
 		try {
 			session.getTransaction().begin();
+			Credential credential = session.load(Credential.class, Integer.parseInt(userId.getText()));
 			
-			//load user
-			user =  session.load(User.class, 1);
-			System.out.print(user.getId());
-			System.out.print(user.getFirstName());
-			System.out.print(user.getRole().getName());
-			
-			//edit user
-//			user.setFirstName("aaaaaa");
-//			session.update(user);
-//			session.getTransaction().commit();
-			
-			
-//			Address address = session.load(Address.class, 1);
-//			//create New User
-			Role role = session.load(Role.class, 2);
-			Address address = session.load(Address.class, 1);
-			
-			User user2 = new User();
-			user2.setFirstName("David");
-			user2.setLastName("Tran");
-			user2.setAddress(address);
-			user2.setRole(role);
-			session.persist(user2);
-			session.getTransaction().commit();
-			
- 
+			if(credential.getUser() != null && credential.getPassword().equals(PasswordMD5.generate(password.getText()))) {
+				
+				errorMessage.setText("");
+				
+				Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+				
+				BorderPane root = null;
+				
+				if(credential.getUser().getRole().getId() == models.Role.LIBRARIAN.getCode()) {
+					root = (BorderPane)FXMLLoader.load(getClass().getResource("/views/LibrarianMain.fxml"));
+				} else if(credential.getUser().getRole().getId() == models.Role.ADMIN.getCode()){
+					root = (BorderPane)FXMLLoader.load(getClass().getResource("/views/AdminMain.fxml"));
+				}
+				
+				Scene scene = new Scene(root,1300,700);
+				scene.getStylesheets().add(getClass().getResource("/assets/css/application.css").toExternalForm());
+				primaryStage.setScene(scene);
+			} else {
+				errorMessage.setText("Invalid User id and Password!");
+				session.close();
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
+			errorMessage.setText("Something was wrong!");
+			session.close();
 		}
 	}
 

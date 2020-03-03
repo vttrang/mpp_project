@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
  
@@ -15,19 +16,17 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import libs.PasswordMD5;
 
 @Entity
 @Table(name = "credential",
   uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id" }) })
-public class Credential {
-	
-	@OneToOne
-    @JoinColumn(name = "fk_credential_user")
-    public User user;
+public class Credential implements Serializable{
 	
 	@Id
-	@Column(name = "user_id")
-	private Integer userId;
+	@OneToOne
+    @JoinColumn(name = "user_id")
+    public User user;
 	
 	@Column(name = "password")
 	private String password;
@@ -40,19 +39,11 @@ public class Credential {
 		this.user = user;
 	}
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = PasswordMD5.generate(password);
 	}
 }
