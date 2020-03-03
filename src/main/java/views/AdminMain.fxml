@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
    <center>
    </center>
    <center>
@@ -37,7 +37,7 @@
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Button>
-            <Button layoutX="737.0" layoutY="65.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="137.0" style="-fx-background-color: #8ba674;" text="Add New Member" textFill="WHITE">
+            <Button fx:id="newMember" layoutX="737.0" layoutY="65.0" mnemonicParsing="false" onAction="#newMember" prefHeight="51.0" prefWidth="137.0" style="-fx-background-color: #8ba674;" text="Add New Member" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
@@ -47,6 +47,35 @@
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Button>
+            <TabPane layoutX="14.0" layoutY="137.0" prefHeight="506.0" prefWidth="490.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Member">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ToolBar prefHeight="40.0" prefWidth="490.0">
+                                <items>
+                                  <Button fx:id="reloadMember" onAction="#reloadMember" mnemonicParsing="false" text="Reload" />
+                                </items>
+                              </ToolBar>
+                              <TableView fx:id="tbvMember" layoutX="1.0" layoutY="34.0" prefHeight="438.0" prefWidth="489.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" fx:id="firstName"/>
+                                    <TableColumn prefWidth="75.0" text="C1" fx:id="lastName"/>
+                                    <TableColumn prefWidth="75.0" text="C1" fx:id="phone"/>
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Book">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </Pane>
    </center>
