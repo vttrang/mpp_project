@@ -1,8 +1,11 @@
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/models/Librarian.java
+/Users/cuongnguyen/eclipse-workspace/project/src/main/java/entities/Address.java
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/models/Role.java
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/application/App.java
+/Users/cuongnguyen/eclipse-workspace/project/src/main/java/entities/Credential.java
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/models/User.java
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/models/Credential.java
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/libs/HibernateUtils.java
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/controllers/AuthController.java
 /Users/cuongnguyen/eclipse-workspace/project/src/main/java/entities/User.java
+/Users/cuongnguyen/eclipse-workspace/project/src/main/java/entities/Role.java
