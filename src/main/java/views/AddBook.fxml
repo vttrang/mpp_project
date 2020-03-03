@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookController">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField id="addBook_tf_title" fx:id="title" layoutX="14.0" layoutY="21.0" prefHeight="27.0" prefWidth="203.0" promptText="Title" />
+            <TextField id="addBook_tf_isbn" fx:id="isbn" layoutX="14.0" layoutY="78.0" prefHeight="27.0" prefWidth="203.0" promptText="ISBN" />
+            <ListView layoutX="239.0" layoutY="52.0" prefHeight="160.0" prefWidth="200.0" />
+            <Label layoutX="239.0" layoutY="21.0" text="Author" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Book" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Text>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="447.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="addBook_btn_addBook" fx:id="addBook" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBook" prefHeight="44.0" prefWidth="81.0" text="ADD" />
+            <Separator prefHeight="200.0" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
