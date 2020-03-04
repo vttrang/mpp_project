@@ -1,9 +1,7 @@
 package controllers;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,80 +34,111 @@ public class BookController implements Initializable {
 
 	@FXML
 	private TextField isbn;
-	@FXML
-	private TextField quantity;
 
 	@FXML
-	private RadioButton lendable7Days;
+	private TextField title;
 
 	@FXML
-	private Button done;
+	private ListView lvAuthors;
 
 	private SessionFactory factory = HibernateUtils.getSessionFactory();
 	private Session session = factory.getCurrentSession();
 
 	public void initialize(URL location, ResourceBundle resources) {
+		loadAuthor();
 	}
 
 	@FXML
-	public void addBookCopy(ActionEvent event) {
-		try {
-			int isbn = Integer.parseInt(this.isbn.getText());
-			Book book = this.getBook(isbn);
-			if (null == book) {
-				System.out.println("Book is null");
-				return;
-			}
-			int lendableDay = this.lendable7Days.isSelected() ? 7 : 21;
-			
-			if(!session.isOpen()) {
-				session = factory.getCurrentSession();
-				session.getTransaction().begin();
-			}
-			
-			for(int i = 0; i < Integer.parseInt(this.quantity.getText()); i++){
-				BookCopy bookCopy = new BookCopy();
-				bookCopy.setBook(book);
-				bookCopy.setAvailability(1);
-				bookCopy.setLendableDay(lendableDay);
-				session.persist(bookCopy);
-			}
-			
-			session.getTransaction().commit();
-			session.close();
-
-
-		}  catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
+	public void addBook(ActionEvent event) {
+		addBook();
 	}
 
-	@FXML
-	public void done(ActionEvent event) {
-		Stage stage = (Stage) done.getScene().getWindow();
-		stage.close();
-	}
-
-	private Book getBook (int isbn) {
-		Book book = new Book();
+	private void loadAuthor() {
 		try {
 			session = factory.getCurrentSession();
 			session.getTransaction().begin();
-			String sql = "Select ck from " + Book.class.getName() +
-					" ck WHERE isbn = " + isbn;
-			Query<Book> query = session.createQuery(sql);
-			List<Book> books = query.getResultList();
-			if (books.size() < 1) {
-				return null;
+
+			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaQuery<Author> cq = cb.createQuery(Author.class);
+			Root<Author> rootEntry = cq.from(Author.class);
+			CriteriaQuery<Author> all = cq.select(rootEntry);
+			TypedQuery<Author> allQuery = session.createQuery(all);
+			List<Author> authors = allQuery.getResultList();
+
+			List<String> temp = new ArrayList<String>();
+			for (Author author: authors) {
+				String s = author.getFName() + " " + author.getLName() + " - " + author.getId();
+				temp.add(s);
 			}
-			book = books.get(0);
+			ObservableList<String> authorFirstNames = FXCollections.observableArrayList(temp);
+			lvAuthors.setItems(authorFirstNames);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		finally {
 			session.close();
 		}
-		return book;
+	}
+
+	private void addBook() {
+		int isbn;
+		String title;
+
+		if (this.isbn.getText().isEmpty() || this.title.getText().isEmpty()) return;
+
+		String selectedAuthor = (String) lvAuthors.getSelectionModel().getSelectedItem();
+		String[] temp = selectedAuthor.split("-");
+		String authorId = temp[1];
+		Author author = this.getAuthor(authorId);
+
+		if (null == author) return;
+		isbn = Integer.parseInt(this.isbn.getText());
+		title = this.title.getText();
+		Set<Author> authors = new HashSet<Author>();
+		authors.add(author);
+		try {
+			session = factory.getCurrentSession();
+			session.getTransaction().begin();
+			Book book = new Book();
+			book.setIsbn(isbn);
+			book.setTitle(title);
+			book.addAuthor(authors);
+			session.persist(book);
+			session.getTransaction().commit();
+			session.close();
+
+		}  catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		finally {
+			session.close();
+		}
+	}
+
+	private Author getAuthor(String authorID) {
+		Author author = new Author();
+		try {
+			if (authorID.isEmpty()) return null;
+
+			session = factory.getCurrentSession();
+			session.getTransaction().begin();
+			String sql = "Select ck from " + Author.class.getName() +
+					" ck WHERE id = " + authorID;
+			Query<Author> query = session.createQuery(sql);
+			List<Author> authors = query.getResultList();
+			if (authors.size() < 1) {
+				return null;
+			}
+			author = authors.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return author;
+
 	}
 }

@@ -26,14 +26,14 @@ public class Author implements Serializable{
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "fname")
+	@Column(name = "first_name")
 	private String fname;
 
-	@Column(name = "lname")
+	@Column(name = "last_name")
 	private String lname;
 
-	@Column(name = "credentials")
-	private String credentials;
+	@Column(name = "credential")
+	private String credential;
 
 	@Column(name = "bio")
 	private String bio;
@@ -62,12 +62,12 @@ public class Author implements Serializable{
 		this.lname = lname;
 	}
 
-	public String getCredentials() {
-		return credentials;
+	public String getCredential() {
+		return credential;
 	}
 
-	public void setCredentials(String credentials) {
-		this.credentials = credentials;
+	public void setCredential(String credentials) {
+		this.credential = credentials;
 	}
 
 	public String getBio() {

@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -66,6 +67,12 @@ public class MainController implements Initializable {
 
     @FXML
     public TableColumn<User, String> phone;
+    
+    @FXML
+    public TableColumn<BookCopy, String>isbnBookCopy;
+
+    @FXML
+    public TableColumn<BookCopy, String>titleBookCopy;
 
     @FXML
     private TableView<Book> tbvBook;
@@ -326,6 +333,20 @@ public class MainController implements Initializable {
             TypedQuery<BookCopy> allQuery = session.createQuery(all);
             ObservableList<BookCopy> books = FXCollections.observableArrayList(allQuery.getResultList());
 
+            titleBookCopy.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<BookCopy,String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(CellDataFeatures<BookCopy, String> param) {
+                	Book b = param.getValue().getBook();
+                    return new SimpleStringProperty(b.getTitle());
+                }
+            });
+            
+            isbnBookCopy.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<BookCopy,String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(CellDataFeatures<BookCopy, String> param) {
+                	Book b = param.getValue().getBook();
+                    return new SimpleStringProperty(b.getIsbn().toString());
+                }
+            });
+            
             isbnCopy.setCellValueFactory(new PropertyValueFactory<BookCopy, Integer>("copyId"));
             availability.setCellValueFactory(new PropertyValueFactory<BookCopy, String>("availability"));
             lendableDay.setCellValueFactory(new PropertyValueFactory<BookCopy, String>("lendableDay"));
@@ -376,4 +397,18 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+	
+	@FXML
+	public void newBook(ActionEvent event) {
+	    try {
+	        BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("/views/AddBook.fxml"));
+	        Scene scene = new Scene(root,480,400);
+	        scene.getStylesheets().add(getClass().getResource("/assets/css/application.css").toExternalForm());
+	        Stage stage = new Stage();
+	        stage.setScene(scene);
+	        stage.show();
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }

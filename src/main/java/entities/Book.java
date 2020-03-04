@@ -29,7 +29,7 @@ public class Book implements Serializable{
 	@JoinTable(name = "book_author",
     joinColumns = { @JoinColumn(name = "isbn") },
     inverseJoinColumns = { @JoinColumn(name = "author_id") })
-    private Set<Author> products = new HashSet<Author>();
+    private Set<Author> authors = new HashSet<Author>();
 
 	@Id
 	@Column(name = "isbn")
@@ -52,6 +52,10 @@ public class Book implements Serializable{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public void addAuthor(Set<Author> authors) {
+		   this.authors.addAll(authors);
 	}
 
 }
