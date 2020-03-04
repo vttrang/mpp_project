@@ -46,4 +46,8 @@ public class Credential implements Serializable{
 	public void setPassword(String password) {
 		this.password = PasswordMD5.generate(password);
 	}
+	
+	public boolean isCredential(String password) {
+		return this.getPassword().equals(PasswordMD5.generate(password));
+	}
 }

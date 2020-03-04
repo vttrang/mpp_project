@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="920.0" prefWidth="1301.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+   <center>
+   </center>
+   <bottom>
+      <TabPane fx:id="AdminTabPane" prefHeight="306.0" prefWidth="1323.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Library Member">
+            <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                         <ToolBar prefHeight="40.0" prefWidth="1301.0">
+                           <items>
+                             <Button fx:id="reloadMember" mnemonicParsing="false" onAction="#reloadMember" text="Reload" />
+                           </items>
+                         </ToolBar>
+                         <TableView fx:id="tbvMember" layoutX="1.0" layoutY="34.0" prefHeight="239.0" prefWidth="1301.0">
+                           <columns>
+                             <TableColumn fx:id="firstName" editable="false" prefWidth="456.0" text="First name" />
+                               <TableColumn fx:id="lastName" editable="false" prefWidth="351.0" text="Last name" />
+                               <TableColumn fx:id="phone" editable="false" prefWidth="466.0" text="Phone" />
+                           </columns>
+                         </TableView>
+                      </children>
+                   </AnchorPane>
+              </content>
+          </Tab>
+          <Tab text="Book Collection">
+            <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tbvBook" layoutY="37.0" prefHeight="436.0" prefWidth="1280.0">
+                                <columns>
+                                  <TableColumn fx:id="isbnBook" editable="false" prefWidth="500.0" text="ISBN" />
+                                  <TableColumn fx:id="title" minWidth="0.0" prefWidth="765.0" text="Title" />
+                                </columns>
+                              </TableView>
+                              <ToolBar prefHeight="40.0" prefWidth="1280.0">
+                                <items>
+                                  <Button fx:id="reloadBook" mnemonicParsing="false" onAction="#reloadBook" text="Reload" />
+                                </items>
+                              </ToolBar>
+                           </children></AnchorPane>
+                  </content>
+          </Tab>
+            <Tab text="Book Copy">
+               <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tbvBookCopy" layoutY="37.0" prefHeight="436.0" prefWidth="1280.0">
+                                 <columns>
+                                    <TableColumn fx:id="isbnCopy" editable="false" prefWidth="300.0" text="ID" />
+                                    <TableColumn fx:id="availability" minWidth="0.0" prefWidth="300.0" text="Availability" />
+                                    <TableColumn fx:id="lendableDay" maxWidth="1270.0" minWidth="0.0" prefWidth="780.0" text="Lendable day" />
+                                 </columns>
+                              </TableView>
+                              <ToolBar prefHeight="40.0" prefWidth="1280.0">
+                                 <items>
+                                    <Button fx:id="reloadBookCopy" mnemonicParsing="false" onAction="#reloadBookCopy" text="Reload" />
+                                 </items>
+                              </ToolBar>
+                           </children>
+                        </AnchorPane>
+                     </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </bottom>
+   <top>
+      <Pane prefHeight="136.0" prefWidth="1301.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#8ca288" layoutX="101.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="| Managerment">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="94.0" fitWidth="71.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/images/uni-logo-short.png" />
+               </image>
+            </ImageView>
+            <Text fill="#8ba674" layoutX="12.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Line endX="1200.0" layoutX="100.0" layoutY="130.0" startX="-100.0" />
+            <Text layoutX="1052.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome: " />
+            <Text fx:id="managerName" layoutX="1130.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Of Admin" />
+            <Button fx:id="buttonOpenStageCheckout" layoutX="1191.0" layoutY="89.0" mnemonicParsing="false" onAction="#openStageCheckout" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: #8ba674;" text="checkout" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="newMember" layoutX="749.0" layoutY="89.0" mnemonicParsing="false" onAction="#newMember" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: #8ba674;" text="add member" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="addBook" layoutX="865.0" layoutY="89.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="126.0" style="-fx-background-color: #8ba674;" text="add new Book" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="addBookCopy" layoutX="1010.0" layoutY="89.0" mnemonicParsing="false" onAction="#newBookCopy" prefHeight="27.0" prefWidth="168.0" style="-fx-background-color: #8ba674;" text="add new book copy" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <Pane fx:id="librarianPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnSearch" layoutX="492.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchCheckout" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: #8ba674;" text="search" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnLoadAll" layoutX="602.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadAllCheckout" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: #8ba674;" text="all" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <TextField fx:id="inputSearchUserId" layoutX="26.0" layoutY="15.0" prefHeight="40.0" prefWidth="445.0" promptText="Enter User Id to search checkout" />
+            <TableView fx:id="tbvCheckout" layoutY="61.0" prefHeight="370.0" prefWidth="1290.0">
+              <columns>
+              	<TableColumn fx:id="isbn" prefWidth="103.0" text="ISBN" />
+                <TableColumn fx:id="bookTitle" prefWidth="417.0" text="Book Title" />
+                <TableColumn fx:id="userName" prefWidth="262.0" text="User Name" />
+                <TableColumn fx:id="checkoutDate" prefWidth="219.0" text="Checkout Date" />
+                <TableColumn fx:id="dueDate" minWidth="0.0" prefWidth="288.0" text="Due Date" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

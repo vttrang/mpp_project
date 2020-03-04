@@ -1,9 +1,10 @@
-package models;
+package libs;
 
 public enum Role {
 	LIBRARIAN("librarian", 1),
 	ADMIN("admin", 2),
-	MEMBER("library member", 3);
+	MEMBER("library member", 3),
+	BOTH("admin and librarian", 4);
 	
 	private String name;
 	private int code;

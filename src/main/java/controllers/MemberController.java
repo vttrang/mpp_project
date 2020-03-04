@@ -50,7 +50,7 @@ public class MemberController implements Initializable {
             session.getTransaction().begin();
 
             Address address = this.newAddress();
-            Role role = session.load(Role.class, models.Role.MEMBER.getCode());
+            Role role = session.load(Role.class, libs.Role.MEMBER.getCode());
             User user = this.newUser(address, role);
 
             session.getTransaction().commit();

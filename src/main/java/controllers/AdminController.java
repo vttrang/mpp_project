@@ -10,14 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import libs.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -101,6 +98,34 @@ public class AdminController implements Initializable {
         loadBookCopy();
     }
 
+    @FXML
+    public void newBook(ActionEvent event) {
+        try {
+            BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("/views/AddBook.fxml"));
+            Scene scene = new Scene(root,480,400);
+            scene.getStylesheets().add(getClass().getResource("/assets/css/application.css").toExternalForm());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    public void newBookCopy(ActionEvent event) {
+        try {
+            BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("/views/AddBookCopy.fxml"));
+            Scene scene = new Scene(root,450,340);
+            scene.getStylesheets().add(getClass().getResource("/assets/css/application.css").toExternalForm());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void loadMember() {
         try {
@@ -144,7 +169,6 @@ public class AdminController implements Initializable {
 
             isbn.setCellValueFactory(new PropertyValueFactory<Book, Integer>("isbn"));
             title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-            
             tbvBook.setItems(books);
         } catch (Exception e) {
             e.printStackTrace();

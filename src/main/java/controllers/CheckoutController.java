@@ -74,7 +74,7 @@ public class CheckoutController implements Initializable {
 			//load user
 			user = session.get(User.class, Integer.parseInt(userId.getText()));
 		
-			if(user == null || !user.getRole().getId().equals(models.Role.MEMBER.getCode())) {
+			if(user == null || !user.getRole().getId().equals(libs.Role.MEMBER.getCode())) {
 				errorMessage.setText("User id did not found or User is not member!");
 				session.close();
 				return;

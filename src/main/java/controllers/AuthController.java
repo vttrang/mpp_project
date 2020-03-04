@@ -52,9 +52,9 @@ public class AuthController implements Initializable {
 		Session session = factory.getCurrentSession();
 		try {
 			session.getTransaction().begin();
-			Credential credential = session.load(Credential.class, Integer.parseInt(userId.getText()));
+			Credential credential = session.get(Credential.class, Integer.parseInt(userId.getText()));
 			
-			if(credential.getUser() != null && credential.getPassword().equals(PasswordMD5.generate(password.getText()))) {
+			if(credential != null && credential.isCredential(password.getText())) {
 				
 				errorMessage.setText("");
 				
@@ -62,18 +62,13 @@ public class AuthController implements Initializable {
 				
 				FXMLLoader loader = null;
 				
-				if(credential.getUser().getRole().getId() == models.Role.LIBRARIAN.getCode()) {
-					loader = new FXMLLoader(getClass().getResource("/views/LibrarianMain.fxml"));
-					LibrarianController controller = loader.<LibrarianController>getController();
-					System.out.println(credential.getUser().getId());
-					
-					controller.setUser(credential.getUser());
-					
-				} else if(credential.getUser().getRole().getId() == models.Role.ADMIN.getCode()){
-					loader = FXMLLoader.load(getClass().getResource("/views/AdminMain.fxml"));
-				}
+				loader = new FXMLLoader(getClass().getResource("/views/Main.fxml"));
 				
-				Scene scene = new Scene((BorderPane)loader.load(),1300,700);
+				Scene scene = new Scene((BorderPane)loader.load(),1300,920);
+				
+				MainController controller = loader.<MainController>getController();
+				
+				controller.setUser(credential.getUser());
 				scene.getStylesheets().add(getClass().getResource("/assets/css/application.css").toExternalForm());
 				primaryStage.setScene(scene);
 				session.close();

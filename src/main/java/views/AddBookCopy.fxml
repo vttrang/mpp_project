@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookController">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField id="addBookCopy_tf_isbn" fx:id="isbn" layoutX="47.0" layoutY="51.0" prefHeight="27.0" prefWidth="203.0" promptText="ISBN" />
+            <TextField id="addBookCopy_tf_quantity" fx:id="quantity" layoutX="306.0" layoutY="51.0" prefHeight="31.0" prefWidth="119.0" promptText="Quantity" />
+            <RadioButton id="addBookCopy_rbtn_7d" fx:id="lendable7Days" layoutX="59.0" layoutY="147.0" mnemonicParsing="false" selected="true" text="7 days">
+               <toggleGroup>
+                  <ToggleGroup fx:id="lendableDay" />
+               </toggleGroup></RadioButton>
+            <RadioButton id="addBookCopy_rbtn_21d" fx:id="lendable21days" layoutX="143.0" layoutY="147.0" mnemonicParsing="false" text="21 days" toggleGroup="$lendableDay" />
+            <Label layoutX="47.0" layoutY="120.0" text="Lendable days" />
+            <Label layoutX="47.0" layoutY="14.0" text="ISBN" />
+            <Label layoutX="305.0" layoutY="14.0" text="Quantity" />
+         </children>
+      </Pane>
+   </center>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Book Copy" textAlignment="CENTER" wrappingWidth="296.2548828125" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Text>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="447.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="addBookCopy_btn_addBookCopy" fx:id="addBookCopy" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#addBookCopy" prefHeight="43.0" prefWidth="81.0" text="ADD" />
+            <Separator prefHeight="200.0" />
+            <Button id="addBookCopy_btn_done" fx:id="done" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#done" prefHeight="43.0" prefWidth="81.0" text="DONE" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
