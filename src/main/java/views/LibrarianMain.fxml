@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LibrarianController">
    <center>
    </center>
    <center>
@@ -32,7 +32,27 @@
             <Line endX="1200.0" layoutX="100.0" layoutY="130.0" startX="-100.0" />
             <Text layoutX="1052.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome: " />
             <Text layoutX="1130.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Of Admin" />
-            <Button layoutX="1084.0" layoutY="65.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="160.0" style="-fx-background-color: #8ba674;" text="checkout" textFill="WHITE">
+            <Button fx:id="buttonOpenStageCheckout" layoutX="1084.0" layoutY="65.0" mnemonicParsing="false" onAction="#openStageCheckout" prefHeight="51.0" prefWidth="160.0" style="-fx-background-color: #8ba674;" text="checkout" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <TableView fx:id="tbvCheckout" layoutX="2.0" layoutY="216.0" prefHeight="380.0" prefWidth="1290.0">
+              <columns>
+              	<TableColumn fx:id="isbn" prefWidth="103.0" text="ISBN" />
+                <TableColumn fx:id="bookTitle" prefWidth="417.0" text="Book Title" />
+                <TableColumn fx:id="userName" prefWidth="262.0" text="User Name" />
+                <TableColumn fx:id="checkoutDate" prefWidth="219.0" text="Checkout Date" />
+                <TableColumn fx:id="dueDate" minWidth="0.0" prefWidth="288.0" text="Due Date" />
+              </columns>
+            </TableView>
+            <TextField fx:id="inputSearchUserId" layoutX="50.0" layoutY="156.0" prefHeight="40.0" prefWidth="445.0" promptText="Enter User Id to search checkout" />
+            <Button fx:id="btnSearch" layoutX="508.0" layoutY="156.0" mnemonicParsing="false" onAction="#searchCheckout" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: #8ba674;" text="search" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnLoadAll" layoutX="621.0" layoutY="156.0" mnemonicParsing="false" onAction="#loadAllCheckout" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: #8ba674;" text="all" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>

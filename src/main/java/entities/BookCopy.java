@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -21,39 +24,53 @@ import javax.persistence.GenerationType;
   uniqueConstraints = { @UniqueConstraint(columnNames = {"copy_id" }) })
 public class BookCopy implements Serializable{
 
-	@ManyToOne
+	@OneToOne
     @JoinColumn(name = "isbn")
     private Book book;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "copy_id")
-	private Integer copy_id;
+	private Integer copyId;
 
 	@Column(name = "availability")
-	private boolean availability;
+	private int availability;
 
 	@Column(name = "lendable_day")
-	private Integer lendable_day;
+	private Integer lendableDay;
 
-	public Integer getCopyID() {
-		return copy_id;
+	public Book getBook() {
+		return book;
 	}
 
-	public boolean getAvailability() {
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public Integer getCopyId() {
+		return copyId;
+	}
+
+	public void setCopyId(Integer copyId) {
+		this.copyId = copyId;
+	}
+
+	public int isAvailability() {
 		return availability;
 	}
 
-	public void setAvailability(boolean availability) {
+	public void setAvailability(int availability) {
 		this.availability = availability;
 	}
 
 	public Integer getLendableDay() {
-		return lendable_day;
+		return lendableDay;
 	}
 
-	public void setLendableDay(Integer lendable_day) {
-		this.lendable_day = lendable_day;
+	public void setLendableDay(Integer lendableDay) {
+		this.lendableDay = lendableDay;
 	}
+
+	
 
 }

@@ -31,7 +31,10 @@
       <mapping class="entities.Address" />
       <mapping class="entities.Role" />
       <mapping class="entities.Credential" />
- 
+      <mapping class="entities.Book" />
+	  <mapping class="entities.BookCopy" />
+	  <mapping class="entities.Author" />
+	  <mapping class="entities.Checkout" />
   </session-factory>
  
 </hibernate-configuration>

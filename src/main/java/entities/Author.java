@@ -18,7 +18,7 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Table(name = "author",
-  uniqueConstraints = { @UniqueConstraint(columnNames = {"author_id" }) })
+  uniqueConstraints = { @UniqueConstraint(columnNames = {"id" }) })
 public class Author implements Serializable{
 
 	@Id
@@ -42,8 +42,8 @@ public class Author implements Serializable{
 		return id;
 	}
 
-	public void setId(Integer author_id) {
-		this.id = author_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getFName() {

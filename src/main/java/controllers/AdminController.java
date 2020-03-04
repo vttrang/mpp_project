@@ -1,5 +1,7 @@
 package controllers;
 
+import entities.Book;
+import entities.BookCopy;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,11 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import libs.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,9 +30,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
-    @Override
+    
     public void initialize(URL location, ResourceBundle resources) {
         loadMember();
+        loadBook();
+        loadBookCopy();
     }
 
     @FXML
@@ -41,6 +48,27 @@ public class AdminController implements Initializable {
 
     @FXML
     public TableColumn<User, String> phone;
+
+    @FXML
+    private TableView<Book> tbvBook;
+
+    @FXML
+    public TableColumn<Book, Integer> isbn;
+
+    @FXML
+    public TableColumn<Book, String> title;
+
+    @FXML
+    private TableView<BookCopy> tbvBookCopy;
+
+    @FXML
+    public TableColumn<BookCopy, Integer> isbnCopy;
+
+    @FXML
+    public TableColumn<BookCopy, String> availability;
+
+    @FXML
+    public TableColumn<BookCopy, String> lendableDay;
 
     private SessionFactory factory = HibernateUtils.getSessionFactory();
     private Session session = factory.getCurrentSession();
@@ -63,6 +91,16 @@ public class AdminController implements Initializable {
         loadMember();
     }
 
+    @FXML
+    public void reloadBook(ActionEvent event) {
+        loadBook();
+    }
+
+    @FXML
+    public void reloadBookCopy(ActionEvent event) {
+        loadBookCopy();
+    }
+
 
     private void loadMember() {
         try {
@@ -82,6 +120,58 @@ public class AdminController implements Initializable {
             lastName.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
             phone.setCellValueFactory(new PropertyValueFactory<User, String>("phone"));
             tbvMember.setItems(users);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    private void loadBook() {
+        try {
+            if(!session.isOpen()) {
+                session = factory.getCurrentSession();
+                session.getTransaction().begin();
+            }
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+            Root<Book> rootEntry = cq.from(Book.class);
+            CriteriaQuery<Book> all = cq.select(rootEntry);
+
+            TypedQuery<Book> allQuery = session.createQuery(all);
+            ObservableList<Book> books = FXCollections.observableArrayList(allQuery.getResultList());
+
+            isbn.setCellValueFactory(new PropertyValueFactory<Book, Integer>("isbn"));
+            title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+            
+            tbvBook.setItems(books);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    private void loadBookCopy() {
+        try {
+            if(!session.isOpen()) {
+                session = factory.getCurrentSession();
+                session.getTransaction().begin();
+            }
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<BookCopy> cq = cb.createQuery(BookCopy.class);
+            Root<BookCopy> rootEntry = cq.from(BookCopy.class);
+            CriteriaQuery<BookCopy> all = cq.select(rootEntry);
+
+            TypedQuery<BookCopy> allQuery = session.createQuery(all);
+            ObservableList<BookCopy> books = FXCollections.observableArrayList(allQuery.getResultList());
+
+            isbnCopy.setCellValueFactory(new PropertyValueFactory<BookCopy, Integer>("copyId"));
+            availability.setCellValueFactory(new PropertyValueFactory<BookCopy, String>("availability"));
+            lendableDay.setCellValueFactory(new PropertyValueFactory<BookCopy, String>("lendableDay"));
+            tbvBookCopy.setItems(books);
         } catch (Exception e) {
             e.printStackTrace();
         }

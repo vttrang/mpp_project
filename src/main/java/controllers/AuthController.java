@@ -60,15 +60,20 @@ public class AuthController implements Initializable {
 				
 				Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 				
-				BorderPane root = null;
+				FXMLLoader loader = null;
 				
 				if(credential.getUser().getRole().getId() == models.Role.LIBRARIAN.getCode()) {
-					root = (BorderPane)FXMLLoader.load(getClass().getResource("/views/LibrarianMain.fxml"));
+					loader = new FXMLLoader(getClass().getResource("/views/LibrarianMain.fxml"));
+					LibrarianController controller = loader.<LibrarianController>getController();
+					System.out.println(credential.getUser().getId());
+					
+					controller.setUser(credential.getUser());
+					
 				} else if(credential.getUser().getRole().getId() == models.Role.ADMIN.getCode()){
-					root = (BorderPane)FXMLLoader.load(getClass().getResource("/views/AdminMain.fxml"));
+					loader = FXMLLoader.load(getClass().getResource("/views/AdminMain.fxml"));
 				}
 				
-				Scene scene = new Scene(root,1300,700);
+				Scene scene = new Scene((BorderPane)loader.load(),1300,700);
 				scene.getStylesheets().add(getClass().getResource("/assets/css/application.css").toExternalForm());
 				primaryStage.setScene(scene);
 				session.close();
